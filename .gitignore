@@ -1,0 +1,17 @@
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Office temp files
+~$*.docx
+~$*.xlsx
+~$*.pptx

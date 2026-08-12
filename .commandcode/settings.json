@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(python -c \"from docx import Document; d = Document(r'C:\\PramodAcademy\\AITesterBluePrint4X\\chapter_02_PROMPT_ENG\\task_01_TCGeneration_RicePot\\output\\VWO_TestPlan_Login.docx'); print('Paragraphs:', len(d.paragraphs)); print('Tables:', len(d.tables)); print('--- Headings ---'); [print(p.text) for p in d.paragraphs if p.style.name.startswith('Heading') or p.style.name == 'Title']\")",
+      "Shell(python -c \"from docx import Document; d = Document(r'C:\\PramodAcademy\\AITesterBluePrint4X\\chapter_02_PROMPT_ENG\\task_01_TCGeneration_RicePot\\output\\VWO_TestPlan_Login.docx'); print(repr(d.paragraphs[0].text))\")",
+      "Shell(python -c \" import docx from docx import Document p = r'C:\\PramodAcademy\\AITesterBluePrint4X\\chapter_02_PROMPT_ENG\\task_01_TCGeneration_RicePot\\output\\VWO_TestPlan_Login.docx' d = Document(p) # Replace the corrupted em-dash character in the title paragraph for para in d.paragraphs: if 'Test Plan' in para.text and 'VWO Login Dashboard' in para.text: for run in para.runs: run.text = run.text.replace('\\u2014', '-').replace('\\ufffd', '-') print('Fixed title:', repr(para.text)) d.save(p) print('Saved') \")",
+      "Shell(python -c \" from docx import Document p = r'C:\\PramodAcademy\\AITesterBluePrint4X\\chapter_02_PROMPT_ENG\\task_01_TCGeneration_RicePot\\output\\VWO_TestPlan_Login.docx' d = Document(p) print('Title:', repr(d.paragraphs[0].text)) print('Paragraphs:', len(d.paragraphs), '| Tables:', len(d.tables)) t = d.tables[0] print('RTM table rows:', len(t.rows), 'cols:', len(t.columns)) print('Risk table rows:', len(d.tables[1].rows)) print('Approvals table rows:', len(d.tables[2].rows)) \")",
+      "Shell(python -c \"from docx import Document; d = Document(r'C:\\PramodAcademy\\AITesterBluePrint4X\\chapter_02_PROMPT_ENG\\task_01_TCGeneration_RicePot\\output\\VWO_TestPlan_Login.docx'); print(d.paragraphs[0].text)\")"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

@@ -11,6 +11,10 @@ __pycache__/
 .venv/
 venv/
 
+# Credentials / local config (must never be committed)
+.env
+config.json
+
 # Office temp files
 ~$*.docx
 ~$*.xlsx

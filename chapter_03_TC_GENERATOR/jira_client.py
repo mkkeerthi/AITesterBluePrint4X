@@ -55,6 +55,34 @@ def _adf_to_text(content: list) -> str:
     return "\n".join("".join(parts).splitlines())
 
 
+def check_connection(config: dict) -> str:
+    """Verify Jira connectivity/auth with the given config.
+
+    Calls /rest/api/3/myself so it validates URL, email and API token in
+    one shot. Returns a human-readable result string for the UI.
+    """
+    url = f"{config['jira_url']}/rest/api/3/myself"
+    try:
+        resp = requests.get(
+            url,
+            auth=(config["jira_email"], config["jira_api_token"]),
+            timeout=15,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        who = data.get("displayName") or data.get("emailAddress") or "the account"
+        return f"✅ Connected to Jira as **{who}**."
+    except requests.HTTPError as e:
+        status = e.response.status_code if e.response is not None else "error"
+        if status == 401:
+            return "❌ Jira returned **401 Unauthorized** — check your email and API token."
+        if status == 403:
+            return "❌ Jira returned **403 Forbidden** — your account lacks permission."
+        return f"❌ Jira request failed (HTTP {status}): {e}"
+    except requests.RequestException as e:
+        return f"❌ Could not reach Jira at `{config['jira_url']}`: {e}"
+
+
 def fetch_ticket(key: str, config: dict) -> dict:
     """Fetch a Jira ticket and return {key, summary, description, acceptance_criteria}.
 

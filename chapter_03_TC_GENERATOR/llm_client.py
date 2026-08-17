@@ -14,6 +14,37 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, "templates", "test_cases_template.md")
 DEFAULT_MODEL = "llama-3.3-70b-versatile"
 
 
+def list_models(config: dict) -> list[str]:
+    """Return sorted Groq model ids, or [] when the key is missing/invalid."""
+    api_key = (config.get("groq_api_key") or "").strip()
+    if not api_key:
+        return []
+    try:
+        client = Groq(api_key=api_key)
+        models = client.models.list()
+        return sorted(m.id for m in models.data)
+    except Exception:
+        return []
+
+
+def check_connection(config: dict) -> str:
+    """Verify Groq connectivity/auth with the given API key.
+
+    Lists models — a cheap authenticated call. Returns a human-readable
+    result string for the UI.
+    """
+    api_key = (config.get("groq_api_key") or "").strip()
+    if not api_key:
+        return "❌ Groq API key is empty — enter it and try again."
+    try:
+        client = Groq(api_key=api_key)
+        models = client.models.list()
+        names = ", ".join(sorted(m.id for m in models.data)[:5])
+        return f"✅ Connected to Groq. Available models include: `{names}`."
+    except Exception as e:  # Groq SDK raises APIStatusError etc.
+        return f"❌ Groq connection failed: {e}"
+
+
 def _load_template() -> str:
     with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
         return f.read()
@@ -31,8 +62,9 @@ def _fill_placeholders(template: str, ticket: dict) -> str:
     )
 
 
-def generate_test_cases(ticket: dict, config: dict, model: str = DEFAULT_MODEL) -> str:
+def generate_test_cases(ticket: dict, config: dict, model: str | None = None) -> str:
     """Return test cases (markdown) for the given ticket via Groq."""
+    model = model or config.get("groq_model") or DEFAULT_MODEL
     prompt = _fill_placeholders(_load_template(), ticket)
     client = Groq(api_key=config["groq_api_key"])
     response = client.chat.completions.create(

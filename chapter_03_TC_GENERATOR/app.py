@@ -5,6 +5,10 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import csv
+import io
+import re
+
 import streamlit as st
 import requests
 
@@ -12,11 +16,88 @@ import config_store
 import jira_client
 import llm_client
 
-st.set_page_config(page_title="Jira Test Case Generator", page_icon="🧪")
-st.title("🧪 Jira Test Case Generator")
+st.set_page_config(page_title="Jira Test Case Generator", page_icon="🎯", layout="wide")
+st.title("🛡️ Jira Test Case Generator")
+
+# Narrow the sidebar so the chat area gets more room, and style buttons orange.
+st.markdown(
+    """
+    <style>
+        section[data-testid="stSidebar"] {
+            width: 200px !important;
+        }
+        .stButton > button,
+        .stDownloadButton > button {
+            background-color: #FF6B00;
+            color: white;
+            border: none;
+        }
+        .stButton > button:hover,
+        .stDownloadButton > button:hover {
+            background-color: #E05E00;
+            color: white;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
+
+
+def _parse_test_cases(markdown: str) -> list[dict]:
+    """Extract rows from the markdown table the LLM returns.
+
+    Returns a list of dicts keyed by the table header (TID, Test Case
+    Description, ...) or an empty list if no table can be found.
+    """
+    # Find the first markdown table: header row, separator row, data rows.
+    lines = [line.strip() for line in markdown.splitlines()]
+    header_idx = None
+    for i, line in enumerate(lines):
+        if line.startswith("|") and "-" in line and re.search(r"^\|[\s:|-]+\|?$", line):
+            header_idx = i - 1
+            break
+
+    if header_idx is None or header_idx < 0:
+        return []
+
+    header = [c.strip() for c in lines[header_idx].strip("|").split("|")]
+    rows = []
+    for line in lines[header_idx + 2 :]:
+        if not line.startswith("|"):
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) != len(header):
+            continue
+        rows.append(dict(zip(header, cells)))
+    return rows
+
+
+def _cases_to_csv(rows: list[dict]) -> str:
+    if not rows:
+        return ""
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=list(rows[0].keys()))
+    writer.writeheader()
+    writer.writerows(rows)
+    return output.getvalue()
+
+
+def _test_case_actions(markdown: str, key: str) -> None:
+    """Render the Export-to-CSV button for a generated markdown reply."""
+    rows = _parse_test_cases(markdown)
+    if not rows:
+        return
+
+    st.download_button(
+        "⬇️ Export to CSV",
+        data=_cases_to_csv(rows),
+        file_name=f"test_cases_{key}.csv",
+        mime="text/csv",
+        key=f"csv_{key}",
+    )
 
 
 def _is_configured(config: dict) -> bool:
@@ -30,7 +111,7 @@ def _handle_request(user_text: str) -> str:
 
     key = jira_client.extract_ticket_key(user_text)
     if not key:
-        return "I couldn't find a Jira ticket key in your message. Try something like: `create test cases for QA-102`"
+        return "I couldn't find a Jira ticket key in your message. Try uppercase letters like `QA-102`."
 
     try:
         ticket = jira_client.fetch_ticket(key, config)
@@ -49,11 +130,13 @@ def _handle_request(user_text: str) -> str:
         return f"Test case generation failed: {e}"
 
 
-for message in st.session_state["messages"]:
+for i, message in enumerate(st.session_state["messages"]):
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+        if message["role"] == "assistant":
+            _test_case_actions(message["content"], f"msg_{i}")
 
-prompt = st.chat_input("e.g. create test cases for QA-102")
+prompt = st.chat_input("Enter Jira ticket key (example: QA-102)")
 if prompt:
     st.session_state["messages"].append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -63,4 +146,5 @@ if prompt:
         with st.spinner("Fetching ticket and generating test cases..."):
             reply = _handle_request(prompt)
         st.markdown(reply)
+        _test_case_actions(reply, "latest")
     st.session_state["messages"].append({"role": "assistant", "content": reply})

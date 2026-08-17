@@ -22,6 +22,7 @@ REQUIRED_KEYS = (
     "jira_email",
     "jira_api_token",
     "groq_api_key",
+    "groq_model",
 )
 
 
@@ -41,6 +42,7 @@ def _load_env_values() -> dict:
         "jira_email": os.getenv("JIRA_EMAIL", ""),
         "jira_api_token": os.getenv("JIRA_API_TOKEN", ""),
         "groq_api_key": os.getenv("GROQ_API_KEY", ""),
+        "groq_model": os.getenv("GROQ_MODEL", ""),
     }
     values["jira_url"] = _normalize_jira_url(values["jira_url"])
     return values
@@ -64,6 +66,8 @@ def save_config(values: dict) -> dict:
     """Persist the given config to config.json and return the saved dict."""
     clean = {key: (values.get(key) or "").strip() for key in REQUIRED_KEYS}
     clean["jira_url"] = _normalize_jira_url(clean["jira_url"])
+    if clean["groq_model"] == "":
+        clean["groq_model"] = "llama-3.3-70b-versatile"
     with open(CONFIG_PATH, "w", encoding="utf-8") as f:
         json.dump(clean, f, indent=2)
     return clean

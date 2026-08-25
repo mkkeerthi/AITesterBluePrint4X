@@ -5,13 +5,13 @@ You are a senior Python full-stack engineer and AI application architect, experi
 
 ## Instructions
 [Mandatory] Build a **two-screen Streamlit application**:
-- **Screen 1 — Chat**: A ChatGPT-style interface with a text input box and a Send button. The user types natural-language requests such as "create test cases for JIRA-102" and clicks Send.
-- **Screen 2 — Settings**: A configuration screen to input and persist: Jira URL, Jira email ID, Jira API token and Groq API key.
+- **Screen 1 — Chat**: A ChatGPT-style interface with a text input box and a Send button. The user types natural-language requests such as "create test cases for JIRA-102" or just Jira work item id and clicks Send.
+- **Screen 2 — Settings**: A configuration screen to input Jira URL, Jira email ID, Jira API token, Groq API key and a dropdown with all the available Groq models to choose from. A Save settings button to persist the provided values. Another section below with two buttons, one to check Jira Connectivity and another to check Groq Connectivity with the given setting inputs. Make the buttons orange in colour.
 
 [Mandatory] End-to-end flow when the user requests test cases for a Jira ID:
 1. Parse the Jira ticket key from the chat message.
 2. Fetch ticket details (summary, description, acceptance criteria) via the Jira REST API using the stored credentials.
-3. Load the test case template from a local `/templates` folder.
+3. Load the test_cases_template from local `/templates` folder.
 4. Generate test cases with Groq, using the fetched ticket content merged into the template structure.
 5. Render the generated test cases back in the chat pane.
 
@@ -24,12 +24,11 @@ This is an internal QA productivity tool, not a production SaaS product. It exis
 
 ## Example
 Sample interaction:
-> User types: `create test cases for QA-102` → clicks Send
+> User types: `create test cases for QA-102` or just the jira work item id `QA-102` → clicks Send
 > App fetches ticket QA-102 from Jira → merges its description/acceptance criteria into the template from `/templates` → sends the combined prompt to Groq → renders the structured test cases in the chat pane, the same way a ChatGPT response would appear.
 
 ## Parameters
-- Jira base URL, Jira email ID, Jira API token — provided separately, entered/saved via the Settings screen
-- Groq API key — provided separately, entered/saved via the Settings screen
+- Jira base URL, Jira email ID, Jira API token, Groq API key — provided separately, entered/saved via the Settings screen
 
 ## Output
 Deliver exactly:

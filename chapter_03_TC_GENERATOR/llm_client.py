@@ -10,6 +10,7 @@ from groq import Groq
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PATH = os.path.join(BASE_DIR, "templates", "test_cases_template.md")
+REQUIREMENT_TEMPLATE_PATH = os.path.join(BASE_DIR, "templates", "requirement_analyse_template.md")
 
 DEFAULT_MODEL = "llama-3.3-70b-versatile"
 
@@ -45,8 +46,8 @@ def check_connection(config: dict) -> str:
         return f"❌ Groq connection failed: {e}"
 
 
-def _load_template() -> str:
-    with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
+def _load_template(path: str = TEMPLATE_PATH) -> str:
+    with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
 
@@ -75,6 +76,30 @@ def generate_test_cases(ticket: dict, config: dict, model: str | None = None) ->
                 "content": (
                     "You are an expert QA functional tester with 15+ years of experience. "
                     "You write enterprise-grade, traceable test cases with zero invented content."
+                ),
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.0,
+    )
+    return response.choices[0].message.content
+
+
+def analyze_requirement(ticket: dict, config: dict, model: str | None = None) -> str:
+    """Return a requirement readiness report (markdown) for the given ticket via Groq."""
+    model = model or config.get("groq_model") or DEFAULT_MODEL
+    prompt = _fill_placeholders(_load_template(REQUIREMENT_TEMPLATE_PATH), ticket)
+    client = Groq(api_key=config["groq_api_key"])
+    response = client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are an expert QA lead who pressure-tests whether a JIRA story is "
+                    "ready to test. Follow the user's workflow exactly, surface gaps, "
+                    "ambiguities and risks, and never fabricate content — a missing item "
+                    "is a finding, not a blank to fill."
                 ),
             },
             {"role": "user", "content": prompt},

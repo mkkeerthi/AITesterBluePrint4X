@@ -19,13 +19,15 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
 │           ├── NonFunctional_TestCases.xlsx
 │           ├── TestPlan.docx
 │           └── raw/                        # CSV / DOCX intermediates
-├── chapter_03_TC_GENERATOR/               # Streamlit app: Jira ticket → Groq test cases
-│   ├── app.py                             # Chat screen (main entry, streamlit run app.py)
+├── chapter_03_TC_GENERATOR/               # Streamlit app: Jira ticket → Groq
+│   ├── app.py                             # Chat screen w/ mode dropdown (streamlit run app.py)
 │   ├── pages/settings.py                  # Settings screen (Jira + Groq credentials)
 │   ├── config_store.py                    # Persisted config (config.json, seeded from .env)
 │   ├── jira_client.py                     # Fetches ticket details via Jira REST API
 │   ├── llm_client.py                      # Merges template + ticket, calls Groq
-│   ├── templates/test_cases_template.md   # Test case template with placeholders
+│   ├── templates/
+│   │   ├── test_cases_template.md         # Test case template with placeholders
+│   │   └── requirement_analyse_template.md # Requirement readiness template with placeholders
 │   └── requirements.txt
 └── README.md
 ```
@@ -37,10 +39,13 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
 - **Chapter 2 — Prompt Engineering:** RICE-POT framework (Role, Instructions,
   Context, Example, Parameters, Output, Tone) applied to generate functional
   and non-functional test cases for VWO (`app.vwo.com`) from a real PRD.
-- **Chapter 3 — Test Case Generator App:** A two-screen Streamlit app that
-  turns a Jira ticket key (e.g. `QA-102`) into a Groq-generated test case
-  draft, with credentials stored locally in `config.json` (seeded from `.env`),
-  both excluded from version control.
+- **Chapter 3 — Test Case Generator App:** A two-screen Streamlit app that turns
+  a Jira ticket key (e.g. `QA-102`) into Groq-generated output. A mode dropdown
+  picks between **Generate Test Cases** (existing behavior) and **Analyse
+  Requirement**, which produces a requirement-readiness report from the ticket;
+  if Jira is unreachable the analyser lets you paste the ticket body instead.
+  Credentials are stored locally in `config.json` (seeded from `.env`), both
+  excluded from version control.
 
 ## License
 

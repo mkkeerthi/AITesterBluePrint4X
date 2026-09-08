@@ -1,0 +1,4 @@
+streamlit>=1.36
+requests>=2.31
+groq>=0.9
+python-dotenv>=1.0

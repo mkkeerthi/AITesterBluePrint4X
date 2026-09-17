@@ -29,6 +29,22 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
 │   │   ├── test_cases_template.md         # Test case template with placeholders
 │   │   └── requirement_analyse_template.md # Requirement readiness template with placeholders
 │   └── requirements.txt
+├── chapter_07_AI_Agents/
+│   └── Test_Plan_Agent/                    # Streamlit app: Jira ticket → B.L.A.S.T. test plan
+│       ├── app.py                          # Chat screen w/ mode dropdown
+│       ├── pages/settings.py               # Settings screen (Jira + Groq credentials)
+│       ├── config_store.py                 # Persisted config (config.json, seeded from .env)
+│       ├── jira_client.py                  # Fetches ticket details via Jira REST API
+│       ├── llm_client.py                   # Merges template + ticket, calls Groq
+│       ├── test_plan_template.md           # Test plan template with placeholders
+│       ├── BLAST.md                        # B.L.A.S.T. protocol master system prompt
+│       ├── LLM.md                          # Project constitution (schemas, rules)
+│       ├── task_plan.md                    # Phases, goals, checklists
+│       ├── findings.md                     # Research, discoveries, constraints
+│       ├── progress.md                     # What was done, errors, tests, results
+│       └── requirements.txt
+├── chapter_09_Langflow/                    # Local Langflow instance (visual LLM workflows)
+│   └── .venv/                              # Python 3.13 venv, Langflow installed (gitignored)
 └── README.md
 ```
 
@@ -46,6 +62,15 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
   if Jira is unreachable the analyser lets you paste the ticket body instead.
   Credentials are stored locally in `config.json` (seeded from `.env`), both
   excluded from version control.
+- **Chapter 7 — AI Agents (Test Plan Agent):** Extends the Chapter 3 app pattern to
+  generate a structured **test plan** from a Jira ticket using the **B.L.A.S.T.**
+  protocol (Blueprint, Link, Architect, Stylize, Trigger). Project memory lives in
+  `task_plan.md`, `findings.md`, and `progress.md`, with `LLM.md` as the project
+  constitution. See `BLAST.md` for the full protocol prompt.
+- **Chapter 9 — Langflow:** A local [Langflow](https://github.com/langflow-ai/langflow)
+  instance (visual, drag-and-drop builder for LLM/agent workflows) installed in an
+  isolated Python 3.13 venv. Run it and open <http://127.0.0.1:7860>; setup and
+  run steps are in `chapter_09_Langflow/README.md`.
 
 ## License
 

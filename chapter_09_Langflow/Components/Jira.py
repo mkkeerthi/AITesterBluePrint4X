@@ -10,11 +10,11 @@ from lfx.schema.data import Data
 
 
 class CustomComponent(Component):
-    display_name = "Jira Component (CMDC)"
+    display_name = "Jira Component"
     description = "Fetch a Jira work item description by key."
     documentation: str = "https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issues/"
     icon = "jira"
-    name = "JiraCmdcComponent"
+    name = "JiraComponent"
 
     inputs = [
         MessageTextInput(name="jira_work_key", display_name="Jira Work Item Key", required=True,

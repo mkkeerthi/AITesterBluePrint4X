@@ -14,6 +14,9 @@ chapter_09_Langflow/
 ├── Components/            # Custom Langflow components (Python)
 │   ├── Groq.py            # Groq chat-completion component
 │   └── Jira.py            # Fetches a Jira work item description by key
+├── Flows/                 # Flow definitions exported from Langflow (JSON)
+│   ├── Bug Triage Agent.json
+│   └── Edge Cases Agent.json
 └── .venv/                 # Local virtualenv (Python 3.13, gitignored)
                            #   langflow + all dependencies installed here
 ```

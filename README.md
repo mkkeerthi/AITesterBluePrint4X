@@ -45,6 +45,15 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
 │       └── requirements.txt
 ├── chapter_09_Langflow/                    # Local Langflow instance (visual LLM workflows)
 │   └── .venv/                              # Python 3.13 venv, Langflow installed (gitignored)
+├── chapter_11_RAG/                         # RAG examples (Langflow + n8n)
+│   ├── Langflow/Advanced_RAG/              # Advanced RAG flow (Astra DB, HyDE, reranker)
+│   │   ├── Ai4x_Advance_RAG.json           # Exported Langflow flow: advance RAG
+│   │   ├── Fixed_AI4X_Naive_RAG.json       # Exported Langflow flow: naive RAG
+│   │   └── VWO_500_Test_Cases.csv          # 500 VWO login test cases (seed data)
+│   └── n8n/Naive_RAG/                      # Naive RAG on n8n: Wingify test-case finder
+│       ├── TestCaseFinder.json             # Exported n8n workflow (19 nodes)
+│       ├── Wingify_Login_100_Jira_Test_Cases.csv
+│       └── README.md                       # Node-by-node workflow write-up
 └── README.md
 ```
 
@@ -71,6 +80,11 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
   instance (visual, drag-and-drop builder for LLM/agent workflows) installed in an
   isolated Python 3.13 venv. Run it and open <http://127.0.0.1:7860>; setup and
   run steps are in `chapter_09_Langflow/README.md`.
+- **Chapter 11 — RAG (Retrieval-Augmented Generation):** Example RAG pipelines built two
+  ways. An **n8n** naive-RAG workflow ingests the Wingify login test-case CSV into a Chroma
+  collection and answers questions over it (`chapter_11_RAG/n8n/Naive_RAG/README.md`), and
+  a **Langflow** advanced-RAG flow (`Ai4x_Advance_RAG.json`) backs retrieval with Astra DB,
+  HyDE and a reranker, with `VWO_500_Test_Cases.csv` as its seed data.
 
 ## License
 

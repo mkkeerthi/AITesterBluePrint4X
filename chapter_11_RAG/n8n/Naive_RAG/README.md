@@ -11,11 +11,12 @@ into the prompt. No reranking, no query rewriting, no hybrid search, no graph.
 ## Structure
 
 ```
-chapter_11_RAG_n8n/
-└── Naive_RAG/
-    ├── NaiveRAG_WingifyTestCaseFinder.json     # n8n workflow export (19 nodes)
-    ├── Wingify_Login_100_Jira_Test_Cases.csv   # 100 test cases, Jira import format
-    └── README.md
+chapter_11_RAG/
+└── n8n/
+    └── Naive_RAG/
+        ├── TestCaseFinder.json                     # n8n workflow export (19 nodes)
+        ├── Wingify_Login_100_Jira_Test_Cases.csv   # 100 test cases, Jira import format
+        └── README.md
 ```
 
 ## Flow at a glance
@@ -165,7 +166,7 @@ agent into an evidence-only test-case finder. Its eight sections:
 2. **Create the collection** `wingify-login-testcases` in your Chroma project (the node's
    resource-locator lists existing collections; it does not create one).
 3. **Import** the workflow: n8n canvas -> *Workflows* -> *Import from File* ->
-   `NaiveRAG_WingifyTestCaseFinder.json`.
+   `TestCaseFinder.json`.
 4. **Re-point credentials** on `Embeddings Google Gemini`, `Embeddings Google Gemini1`,
    `Chroma Vector Store`, `Chroma Vector Store1`, `Groq Chat Model` if they were not resolved
    automatically on import.
@@ -209,14 +210,3 @@ worth knowing before trusting them as documentation:
 `Convert To Json Bulk Binary Data` inspect `item.binary` cleanly. The workflow ships inactive —
 activate it only when you want the form and chat endpoints publicly reachable, since both
 triggers expose webhooks.
-
-## Export hygiene
-
-This JSON is committed **scrubbed of instance-specific identifiers**: `meta.instanceId` and the
-`webhookId` on both triggers were removed before publishing. n8n stores API keys outside the
-export (credentials are referenced by internal ID + display name only), so no secret material
-is in this repo.
-
-Removing the webhook IDs means whoever imports this gets **fresh, unguessable endpoint paths**
-assigned on activation, rather than URLs already visible in a public file. Re-exporting an
-edited copy of this workflow will reintroduce both fields — strip them again before committing.

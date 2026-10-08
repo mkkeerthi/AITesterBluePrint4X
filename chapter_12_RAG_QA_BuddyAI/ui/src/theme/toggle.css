@@ -1,0 +1,6 @@
+.theme-toggle { display: inline-flex; align-items: center; gap: 6px; }
+.theme-toggle .ico { font-size: 13px; line-height: 1; }
+
+@media (max-width: 620px) {
+  .theme-toggle .lbl { display: none; }
+}

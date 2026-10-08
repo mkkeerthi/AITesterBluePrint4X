@@ -1,0 +1,27 @@
+# secrets
+.env
+# local runtime state
+.venv/
+.bin/
+.qdrant/
+.qdrant-initialized
+.index/
+__pycache__/
+*.pyc
+.pytest_cache/
+# ui build
+ui/node_modules/
+ui/dist/
+ui/dist-demo/
+.vercel/
+.DS_Store
+.vercel
+
+# the sample Jenkins console logs are corpus data; the repo-wide *.log rule would drop them
+!data/06_Jenkins_Logs/*.log
+
+# local Qdrant install (Windows binary + its storage)
+.qdrant-win/
+# agent / session state, not project code
+.commandcode/
+.claudecode/

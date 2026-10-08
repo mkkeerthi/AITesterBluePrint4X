@@ -1,0 +1,76 @@
+# QABuddy knowledge sources.
+#
+# One entry per source. Drop files into `path` and run `./run.sh ingest`.
+# `kind` picks the chunker, because a test case row, a Java method, a PRD
+# section and a Jenkins stack trace each need a different unit of meaning.
+#
+#   testcases   one row = one chunk                (CSV / XLSX)
+#   jira        ticket body + one chunk per comment (Jira export / synced .md)
+#   docs        heading-aware sections              (PDF, MD, TXT)
+#   transcript  speaker turns with 1-turn overlap   (TXT, MD, VTT, SRT)
+#   diagram     shapes and edges as sentences       (Lucid CSV / JSON / text)
+#   logs        failure windows + build summary     (Jenkins console, JUnit XML)
+#   code        AST split per class / method / test (Java, TS, JS + configs, docs)
+#   figma       phase 2, not ingested yet
+
+sources:
+  - id: test_cases
+    label: Test cases
+    path: data/00_TestCases
+    kind: testcases
+    description: Manual and automated test case repository (CSV/XLSX)
+
+  - id: jira
+    label: JIRA tickets
+    path: data/01_JIRA_Tickets
+    kind: jira
+    description: Bug history. Jira exports, or files written by `sync-jira`
+
+  - id: company_docs
+    label: Company docs
+    path: data/02_Company_Docs
+    kind: docs
+    description: Process docs, onboarding guides, standards (PDF/MD)
+
+  - id: meeting_notes
+    label: Meeting notes
+    path: data/03_Meeting_Notes
+    kind: transcript
+    description: Meeting notes and recording transcripts
+
+  - id: lucid
+    label: Lucid charts
+    path: data/04_Lucid_charts
+    kind: diagram
+    description: Lucid diagrams exported as CSV shape data, JSON or text
+
+  - id: requirements
+    label: PRD / SRS / BRD / FRD
+    path: data/05_PRD_SRS_BRD_FRDs
+    kind: docs
+    description: Requirement and specification documents
+
+  - id: figma
+    label: Figma designs
+    path: data/06_Figma_Desings
+    kind: figma
+    phase: 2
+    description: ER diagrams, user guides, wireframes (phase 2)
+
+  - id: jenkins
+    label: Jenkins logs
+    path: data/06_Jenkins_Logs
+    kind: logs
+    description: Console logs and JUnit/TestNG results
+
+  - id: selenium
+    label: Selenium framework
+    path: data/07_Source_Codes/ATB13xSeleniumAdvanceFramework
+    kind: code
+    description: Java + TestNG framework (POM, PageFactory, listeners)
+
+  - id: playwright
+    label: Playwright framework
+    path: data/07_Source_Codes/AdvancePlaywrightFramework1x
+    kind: code
+    description: TypeScript Playwright framework (POM, fixtures, API tests)

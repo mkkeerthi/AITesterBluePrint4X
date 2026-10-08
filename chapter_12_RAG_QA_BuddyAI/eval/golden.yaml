@@ -1,0 +1,55 @@
+# Retrieval eval set: each question lists what a correct top-k must contain.
+# A case passes when ANY `expect` entry matches a retrieved source.
+# Match keys: title (substring), file (substring of file_path), source (source_id).
+# Run: ./run.sh eval   (or python -m qabuddy eval)
+
+k: 6
+cases:
+  - q: Why did vwo-selenium-regression #142 fail?
+    expect: [{title: QAB-101}, {file: vwo-selenium-regression_142}]
+  - q: What is the root cause of the CI login failures after the agent migration?
+    expect: [{title: QAB-101}, {title: Login Failure Triage Meeting}]
+  - q: What is VWO-26 about?
+    expect: [{title: VWO-26}]
+  - q: Is VWO-33 a duplicate of another ticket?
+    expect: [{title: VWO-33}, {title: Login Failure Triage Meeting}]
+  - q: Is testLoginPositiveVWO flaky?
+    expect: [{title: QAB-102}, {file: vwo-selenium-regression_143}]
+  - q: Why does the checkout test see 2 cart rows in playwright-e2e #88?
+    expect: [{title: QAB-103}, {file: playwright-e2e_88}]
+  - q: How do I wait for an element in the Selenium framework?
+    expect: [{file: WaitHelpers.java}]
+  - q: What is the retry limit in RetryAnalyzer?
+    expect: [{file: RetryAnalyzer.java}, {title: Flaky test policy}]
+  - q: Where is the VWO login page object and which locators does it use?
+    expect: [{file: improved_POM/LoginPage.java}, {file: normal_POM/LoginPage.java}]
+  - q: How do Playwright tests get the booking auth token?
+    expect: [{file: booker.fixture.ts}]
+  - q: Show the end to end checkout test in Playwright
+    expect: [{file: e2e-checkout.spec.ts}]
+  - q: Which test case checks email field visibility on login?
+    expect: [{title: LOGIN-002}]
+  - q: Which test cases cover blocking access to another user's support ticket?
+    expect: [{title: SUPPORT-051}]
+  - q: What are the functional requirements for heatmaps and session recordings?
+    expect: [{title: 6 Functional Requirements}]
+  - q: What are the non-functional requirements for security?
+    expect: [{title: 7 Non-Functional Requirements}]
+  - q: What is SmartStats?
+    expect: [{source: requirements}]
+  - q: What is our flaky test policy?
+    expect: [{title: Flaky test policy}, {title: 4 Flaky test policy}]
+  - q: How should bugs be triaged for severity and priority?
+    expect: [{title: Bug triage}]
+  - q: Who should I ask about Jenkins agents?
+    expect: [{title: Who to ask}, {title: CI Test Pipeline}]
+  - q: What happens after 5 failed login attempts?
+    expect: [{title: Login Authentication Flow}]
+  - q: What are the stages of the A/B test experiment lifecycle?
+    expect: [{title: A/B Test Experiment Lifecycle}]
+  - q: What did we decide in the sprint 15 QA planning about automation coverage?
+    expect: [{title: Sprint 15}]
+  - q: What are the action items from the login failure triage meeting?
+    expect: [{title: decisions and action items}]
+  - q: Which PRD features may have no test cases?
+    expect: [{title: Coverage gaps}, {title: Daily Standup}, {source: requirements}]

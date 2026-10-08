@@ -1,0 +1,16 @@
+# The hosted demo only needs the UI, the exported demo data and api/demo-chat.js.
+.venv/
+.bin/
+.qdrant/
+.index/
+data/
+qabuddy/
+tests/
+eval/
+deploy/
+requirements.txt
+run.sh
+ui/node_modules/
+ui/dist/
+ui/dist-demo/
+*.prompt.md

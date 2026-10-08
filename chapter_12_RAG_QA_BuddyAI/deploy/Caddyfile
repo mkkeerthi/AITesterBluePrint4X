@@ -1,0 +1,13 @@
+# HTTPS (automatic Let's Encrypt) + a shared team login in front of QABuddy.
+# The index holds company code, tickets and logs: never expose it without auth.
+# Hash a password with:  docker run --rm caddy:2 caddy hash-password --plaintext 'your-password'
+{$QABUDDY_DOMAIN} {
+	encode gzip
+	basic_auth {
+		{$QABUDDY_USER} {$QABUDDY_PASS_HASH}
+	}
+	reverse_proxy app:8300 {
+		# stream answer tokens to the browser as they arrive (Server-Sent Events)
+		flush_interval -1
+	}
+}

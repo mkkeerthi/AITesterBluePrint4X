@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo skip",
+  "buildCommand": "cd ui && npm install && npm run build:demo",
+  "outputDirectory": "ui/dist-demo",
+  "functions": {
+    "api/demo-chat.js": {
+      "maxDuration": 60
+    }
+  }
+}

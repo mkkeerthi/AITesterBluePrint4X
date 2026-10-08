@@ -1,0 +1,66 @@
+# QA terminology normalisation.
+#
+# Applied to the keyword (BM25) half of every search: when a question uses a
+# term on the left, the search also looks for the terms on the right, at half
+# weight. Dense embeddings already understand most synonyms; this file exists
+# for the team's own shorthand, which no embedding model has ever seen.
+#
+# Keys are matched case-insensitively as whole words or phrases.
+# Add your company's acronyms here; no re-index is needed (query-time only).
+
+expansions:
+  # --- artefacts ---
+  tc: [test case]
+  tcs: [test cases]
+  test case: [scenario, tid]
+  rtm: [requirements traceability matrix, traceability]
+  rca: [root cause analysis, root cause]
+  prd: [product requirements document, requirements]
+  srs: [software requirements specification]
+  brd: [business requirements document]
+  frd: [functional requirements document]
+  bug: [defect, issue]
+  defect: [bug]
+
+  # --- framework vocabulary ---
+  pom: [page object model, page object]
+  page object: [pom]
+  pf: [page factory, pagefactory]
+  page factory: [pagefactory, findby]
+  locator: [selector, by, getbyrole, locator]
+  selector: [locator]
+  wait: [explicit wait, webdriverwait, waithelpers]
+  fixture: [fixtures, test-base]
+  listener: [listeners, itestlistener]
+  retry: [retryanalyzer, rerun, flaky]
+  flaky: [retry, retryanalyzer, intermittent, rerun]
+  screenshot: [takescreenshot, screenshotlistener]
+  data driven: [dataprovider, excel, utilexcel]
+  e2e: [end to end]
+  api test: [request, apihelper, restful booker]
+  schema: [ajv, schemavalidator]
+  pw: [playwright]
+  sel: [selenium]
+  testng: [testng.xml, suite]
+
+  # --- product vocabulary (VWO) ---
+  login: [sign in, signin, authentication]
+  sign in: [login]
+  signin: [login]
+  auth: [authentication, login]
+  sso: [single sign on, saml]
+  2fa: [two factor authentication, otp, mfa]
+  mfa: [multi factor authentication, 2fa]
+  otp: [one time password, 2fa]
+  ab test: [abtest, a/b test, experiment, variation]
+  a/b: [abtest, experiment]
+  experiment: [abtest, variation, campaign]
+  heatmap: [insights, behavior]
+  admin: [administrator, adminlogged]
+
+  # --- CI vocabulary ---
+  build: [jenkins, pipeline]
+  pipeline: [jenkins, stage]
+  failed: [failure, error, exception]
+  failure: [failed, error, exception]
+  timeout: [timed out, timeouterror]

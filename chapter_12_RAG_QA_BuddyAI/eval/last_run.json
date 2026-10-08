@@ -1,0 +1,191 @@
+{
+ "k": 6,
+ "summary": {
+  "dense": {
+   "hit": 1.0,
+   "mrr": 0.833
+  },
+  "bm25": {
+   "hit": 1.0,
+   "mrr": 0.882
+  },
+  "hybrid": {
+   "hit": 1.0,
+   "mrr": 0.91
+  },
+  "full": {
+   "hit": 1.0,
+   "mrr": 0.91
+  }
+ },
+ "rows": [
+  {
+   "q": "Why did vwo-selenium-regression",
+   "dense": 1,
+   "bm25": 2,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What is the root cause of the CI login failures after the agent migration?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What is VWO-26 about?",
+   "dense": 4,
+   "bm25": 2,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "Is VWO-33 a duplicate of another ticket?",
+   "dense": 5,
+   "bm25": 1,
+   "hybrid": 2,
+   "full": 1
+  },
+  {
+   "q": "Is testLoginPositiveVWO flaky?",
+   "dense": 2,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "Why does the checkout test see 2 cart rows in playwright-e2e",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "How do I wait for an element in the Selenium framework?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What is the retry limit in RetryAnalyzer?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "Where is the VWO login page object and which locators does it use?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "How do Playwright tests get the booking auth token?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 2
+  },
+  {
+   "q": "Show the end to end checkout test in Playwright",
+   "dense": 1,
+   "bm25": 3,
+   "hybrid": 2,
+   "full": 3
+  },
+  {
+   "q": "Which test case checks email field visibility on login?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 2
+  },
+  {
+   "q": "Which test cases cover blocking access to another user's support ticket?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What are the functional requirements for heatmaps and session recordings?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What are the non-functional requirements for security?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What is SmartStats?",
+   "dense": 2,
+   "bm25": 3,
+   "hybrid": 3,
+   "full": 2
+  },
+  {
+   "q": "What is our flaky test policy?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "How should bugs be triaged for severity and priority?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "Who should I ask about Jenkins agents?",
+   "dense": 5,
+   "bm25": 1,
+   "hybrid": 2,
+   "full": 1
+  },
+  {
+   "q": "What happens after 5 failed login attempts?",
+   "dense": 3,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What are the stages of the A/B test experiment lifecycle?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What did we decide in the sprint 15 QA planning about automation coverage?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "What are the action items from the login failure triage meeting?",
+   "dense": 1,
+   "bm25": 2,
+   "hybrid": 1,
+   "full": 1
+  },
+  {
+   "q": "Which PRD features may have no test cases?",
+   "dense": 1,
+   "bm25": 1,
+   "hybrid": 1,
+   "full": 1
+  }
+ ]
+}

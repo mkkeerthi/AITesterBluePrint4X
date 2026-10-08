@@ -1,0 +1,6 @@
+[submodule "chapter_12_RAG_QA_BuddyAI/data/07_Source_Codes/ATB13xSeleniumAdvanceFramework"]
+	path = chapter_12_RAG_QA_BuddyAI/data/07_Source_Codes/ATB13xSeleniumAdvanceFramework
+	url = https://github.com/PramodDutta/ATB13xSeleniumAdvanceFramework.git
+[submodule "chapter_12_RAG_QA_BuddyAI/data/07_Source_Codes/AdvancePlaywrightFramework1x"]
+	path = chapter_12_RAG_QA_BuddyAI/data/07_Source_Codes/AdvancePlaywrightFramework1x
+	url = https://github.com/PramodDutta/AdvancePlaywrightFramework1x.git

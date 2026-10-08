@@ -54,6 +54,20 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
 │       ├── TestCaseFinder.json             # Exported n8n workflow (19 nodes)
 │       ├── Wingify_Login_100_Jira_Test_Cases.csv
 │       └── README.md                       # Node-by-node workflow write-up
+├── chapter_12_RAG_QA_BuddyAI/              # Hybrid RAG for QA (Qdrant + Ollama + Groq)
+│   ├── qabuddy/                            # Python package: chunkers, embed, retrieve, rerank, store
+│   ├── ui/                                 # Vite/React chat UI + hosted Vercel demo
+│   ├── api/                                # Vercel serverless functions (demo-chat, prompt)
+│   ├── data/                               # 10 knowledge-source folders (test cases, Jira, docs...)
+│   │   └── 07_Source_Codes/                # Selenium & Playwright frameworks (git submodules)
+│   ├── deploy/                             # Dockerfile, Compose, Caddy, DEPLOY.md
+│   ├── eval/                               # golden.yaml + last retrieval run
+│   ├── tests/                              # regression tests
+│   ├── docs/                               # screenshots (RCA answer, retrieval trace)
+│   ├── sources.yaml                        # source folder -> chunker map
+│   ├── glossary.yaml
+│   ├── run.sh                              # start / ingest / ask / eval / test / demo
+│   └── README.md                           # design decisions, modes, results, deploy
 └── README.md
 ```
 
@@ -85,6 +99,12 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
   collection and answers questions over it (`chapter_11_RAG/n8n/Naive_RAG/README.md`), and
   a **Langflow** advanced-RAG flow (`Ai4x_Advance_RAG.json`) backs retrieval with Astra DB,
   HyDE and a reranker, with `VWO_500_Test_Cases.csv` as its seed data.
+- **Chapter 12 — RAG QA Buddy (QABuddy.ai):** A multi-source hybrid RAG app that answers QA
+  questions with cited sources. It ingests 10 data folders (test cases, Jira bugs, docs,
+  meeting transcripts, Lucid charts, Jenkins logs, and both framework repos) through
+  source-aware chunkers, indexes dense + BM25 vectors in Qdrant (Qwen3-Embedding via
+  Ollama), reranks with a cross-encoder, and answers via Groq. See
+  `chapter_12_RAG_QA_BuddyAI/README.md`.
 
 ## License
 

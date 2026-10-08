@@ -1,0 +1,4 @@
+# Phase 2 (plan): hourly auto-ingestion. Install with `crontab hourly-ingest.cron` on the droplet.
+# Ingestion is incremental (sha256 per file), so an hour with no changes costs a few seconds.
+# 1. pull new commits   2. pull tickets changed in the last 2 hours   3. re-index what changed
+0 * * * * cd /opt/qabuddy && for r in data/07_Source_Codes/*/; do git -C "$r" pull -q; done && docker compose -f deploy/docker-compose.yml exec -T app python -m qabuddy sync-jira --jql "project = VWO AND updated >= -2h" && docker compose -f deploy/docker-compose.yml exec -T app python -m qabuddy ingest >> /var/log/qabuddy-ingest.log 2>&1

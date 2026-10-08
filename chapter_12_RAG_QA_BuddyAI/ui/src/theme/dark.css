@@ -1,0 +1,62 @@
+/* Dark theme — active only on <html data-theme="dark">. Every rule is scoped,
+   so the light theme in styles.css is left exactly as it is. */
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* surfaces */
+  --bg: #14161a;
+  --panel: #1a1d23;
+  --card: #202531;
+  --edge: #2b3038;
+  --edge-2: #3b4250;
+
+  /* text */
+  --ink: #e9e7e2;
+  --ink-2: #c6c4be;
+  --muted: #9aa0aa;
+  --faint: #7d8492;
+
+  /* brand accent, lifted for contrast on dark */
+  --accent: #e08a68;
+  --accent-2: #f0a184;
+  --accent-soft: #2b201b;
+
+  /* status */
+  --ok: #63d29a;
+  --ok-soft: #15261d;
+  --warn: #e8b26a;
+  --warn-soft: #2a2216;
+  --bad: #f08a82;
+  --bad-soft: #2b1a19;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 6px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* styles.css hardcodes these as translucent white / near-white */
+:root[data-theme='dark'] .mode:hover,
+:root[data-theme='dark'] .src:hover { background: rgba(255, 255, 255, 0.05); }
+
+:root[data-theme='dark'] .a-head,
+:root[data-theme='dark'] .a-foot,
+:root[data-theme='dark'] .md tr:nth-child(even) td { background: var(--panel); }
+
+:root[data-theme='dark'] .md pre,
+:root[data-theme='dark'] .codebox { background: #0d1117; }
+
+/* borders hardcoded from the light palette */
+:root[data-theme='dark'] .err { border-color: #4a2b28; }
+:root[data-theme='dark'] .pill.demo { border-color: #4a352c; }
+:root[data-theme='dark'] .term.exp { border-color: #4a352c; }
+
+:root[data-theme='dark'] table.tr tr.sel td { background: #232a34; }
+:root[data-theme='dark'] .overlay { background: rgba(0, 0, 0, 0.55); }
+
+/* In the light theme --ink is a dark *surface* for the question bubble and the
+   Stop button; in dark, --ink is light, so give them a real dark surface. */
+:root[data-theme='dark'] .q { background: #2a3038; color: var(--ink); }
+:root[data-theme='dark'] .send.stop { background: #2a3038; }
+
+:root[data-theme='dark'] .pill.ok .dot { background: #63d29a; }
+:root[data-theme='dark'] ::selection { background: rgba(224, 138, 104, 0.35); }
+:root[data-theme='dark'] * { scrollbar-color: #3b4250 transparent; }

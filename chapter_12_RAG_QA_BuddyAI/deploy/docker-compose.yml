@@ -1,0 +1,54 @@
+# QABuddy on one VPS: Ollama + the app, behind Caddy (HTTPS + login).
+# Vector search uses an external/managed Qdrant (set QDRANT_URL/QDRANT_API_KEY in ../.env).
+# Only Caddy publishes ports; Ollama is reachable from the app only.
+#
+#   cd deploy && docker compose up -d --build
+#   docker compose exec app python -m qabuddy ingest
+services:
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    volumes:
+      - ollama_models:/root/.ollama
+
+  # one-shot: pull the embedding model into the shared volume, then exit
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on: [ollama]
+    restart: "no"
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["sh", "-c", "sleep 5 && ollama pull ${EMBED_MODEL:-qwen3-embedding:0.6b}"]
+
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      OLLAMA_URL: http://ollama:11434
+    volumes:
+      - ../data:/app/data
+      - app_index:/app/.index
+      - hf_models:/models
+    depends_on: [ollama]
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      QABUDDY_DOMAIN: ${QABUDDY_DOMAIN:-qabuddy.example.com}
+      QABUDDY_USER: ${QABUDDY_USER:-qa}
+      QABUDDY_PASS_HASH: ${QABUDDY_PASS_HASH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [app]
+
+volumes:
+  ollama_models:
+  app_index:
+  hf_models:
+  caddy_data:

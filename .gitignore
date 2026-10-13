@@ -11,6 +11,9 @@ __pycache__/
 .venv/
 venv/
 
+# Langflow runtime data (SQLite DB + encryption secret key)
+langflow_data/
+
 # Credentials / local config (must never be committed)
 .env
 config.json

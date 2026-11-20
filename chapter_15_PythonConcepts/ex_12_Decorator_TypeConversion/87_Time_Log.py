@@ -41,3 +41,35 @@ test_ui_1()
 print(" -----  ")
 # without the decor
 test_ui_2()
+
+# More complex: a timing decorator that forwards arguments and returns the
+# result, so it can wrap functions with parameters (not just `def f()`).
+def timed(func):
+    def wrapper(*args, **kwargs):
+        started = time.perf_counter()
+        try:
+            return func(*args, **kwargs)
+        finally:
+            elapsed = time.perf_counter() - started
+            print(f"{func.__name__} took {elapsed:.4f}s")
+    return wrapper
+
+
+@timed
+def download(pages, delay=0.2):
+    for page in range(1, pages + 1):
+        time.sleep(delay)
+    return pages
+
+
+print("downloaded pages:", download(3))
+print("downloaded pages:", download(pages=2, delay=0.1))
+
+# Stacking order matters: decorators apply bottom-up, and run top-down.
+@timed
+@print_logs
+def quick():
+    print("quick task")
+
+
+quick()

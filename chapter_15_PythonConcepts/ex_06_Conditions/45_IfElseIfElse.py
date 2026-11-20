@@ -12,3 +12,15 @@ if  num>=0:
         print("Odd")
 else:
     print("Negative Number!")
+
+# More complex: classify every number in a list using nested conditions.
+def classify(value):
+    if value >= 0:
+        if value == 0:
+            return "zero"
+        return f"positive {'even' if value % 2 == 0 else 'odd'}"
+    return f"negative {'even' if value % 2 == 0 else 'odd'}"
+
+
+for number in [-4, -3, 0, 7, 10]:
+    print(f"{number:>3} -> {classify(number)}")

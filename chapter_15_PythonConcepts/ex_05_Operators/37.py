@@ -18,3 +18,21 @@ a = 10
 b = 10
 print(a == b)
 print(a >= b) # 10 > 10 or 10 = 10
+
+# More complex: combine comparison results with logical operators.
+age = 25
+has_id = True
+can_enter = age >= 18 and has_id
+print(can_enter)
+
+# Comparing a value against a valid range, written both ways.
+score = 72
+in_range = 0 <= score <= 100
+print(in_range)
+
+# Using comparisons in a ternary to produce a label.
+grade = "A" if score >= 90 else "B" if score >= 75 else "C" if score >= 60 else "F"
+print(grade)
+
+# not with a comparison flips the answer.
+print(not (a != b), not is_pramod_married)

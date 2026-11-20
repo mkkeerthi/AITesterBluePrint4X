@@ -19,3 +19,20 @@ elif num2>=num3 and num2>=num1:
     print(num2)
 else:
     print(num3)
+
+# More complex: the same "max of three" solved with a reusable function,
+# using built-in max() as the reference answer (inputs are hard-coded).
+def max_of_three(a, b, c):
+    largest = a
+    if b > largest:
+        largest = b
+    if c > largest:
+        largest = c
+    return largest
+
+
+cases = [(5, 3, 2), (10, 12, 11), (-1, -5, -3), (7, 7, 7)]
+for a, b, c in cases:
+    result = max_of_three(a, b, c)
+    print(f"max({a}, {b}, {c}) = {result}  (built-in says {max(a, b, c)})")
+    assert result == max(a, b, c)

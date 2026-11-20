@@ -10,3 +10,17 @@
 
 for i in range(10): #0 to 9, step=1
     print("Hello World!")
+
+# More complex: counting down, and stepping through a list in reverse.
+for i in range(10, 0, -1):
+    print(i, end=" ")
+print()
+
+# Reversing any sequence with reversed() instead of a negative range.
+for letter in reversed("PYTHON"):
+    print(letter, end="")
+print()
+
+# range(stop) can never count down - it needs a negative step.
+print("range(10, 0) is empty:", list(range(10, 0)))
+print("range(10, 0, -2):", list(range(10, 0, -2)))

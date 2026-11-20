@@ -16,3 +16,42 @@ def test_ui():
 start()
 test_ui()
 end()
+
+# More complex: the same setup/test/teardown flow made automatic with a
+# decorator, then applied to multiple tests.
+def with_browser(func):
+    def wrapper(*args, **kwargs):
+        print("Start the Browser")
+        try:
+            result = func(*args, **kwargs)
+        finally:
+            print("Quit the Browser")   # teardown always runs
+        return result
+    return wrapper
+
+
+@with_browser
+def test_home_page():
+    print("I will test the home page")
+    return "passed"
+
+
+@with_browser
+def test_checkout():
+    print("I will test the checkout flow")
+    return "failed"
+
+
+print(test_home_page())
+print(test_checkout())
+
+# The try/finally guarantees teardown even when the test raises.
+@with_browser
+def test_that_raises():
+    raise ValueError("boom")
+
+
+try:
+    test_that_raises()
+except ValueError as error:
+    print("caught:", error)

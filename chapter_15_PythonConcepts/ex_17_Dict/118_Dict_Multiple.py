@@ -24,3 +24,30 @@ print(student_list)
 print(student_list[0])
 print(student_list[0]["name"])
 print(student_list[0]["address"]["office_address"])
+
+# More complex: report over every student, handle a missing nested key
+# safely, and update one field per record.
+for student in student_list:
+    # get() with a default avoids KeyError when a key is missing
+    city = student.get("address", {}).get("home_address", "unknown")
+    print(f"{student['name']:<8} age={student['age']:<4} home={city}")
+
+# Add a derived key to every record.
+for student in student_list:
+    student["adult"] = student["age"] >= 18
+print(student_list[1])
+
+# Filtering records with a nested condition.
+in_ka = [s["name"] for s in student_list if s["address"]["office_address"] == "KA"]
+print("office in KA:", in_ka)
+
+# Sorting records by a nested field.
+by_age = sorted(student_list, key=lambda s: s["age"])
+print([s["name"] for s in by_age])
+
+# Count records per office city using a dict.
+tally = {}
+for student in student_list:
+    office = student["address"]["office_address"]
+    tally[office] = tally.get(office, 0) + 1
+print(tally)

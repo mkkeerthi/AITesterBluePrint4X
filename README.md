@@ -68,6 +68,26 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
 │   ├── glossary.yaml
 │   ├── run.sh                              # start / ingest / ask / eval / test / demo
 │   └── README.md                           # design decisions, modes, results, deploy
+├── chapter_15_PythonConcepts/              # Python from scratch: 18 exercise sets
+│   ├── assets/                             # Brief notes + diagrams (exceptions, OS, packages, pytest)
+│   ├── ex_01_Python_Basics/                # print(), comments, output formatting
+│   ├── ex_02_Keywords_Identifier/          # Keywords, identifiers, variables, naming rules
+│   ├── ex_03_Literals/                     # Literals and multi-line comments
+│   ├── ex_04_Literals_DT_UI_BF/            # Data types, user input, built-ins, strings
+│   ├── ex_05_Operators/                    # Arithmetic, comparison, logical, membership
+│   ├── ex_06_Conditions/                   # if / elif / else
+│   ├── ex_07_Match/                        # match-case pattern matching
+│   ├── ex_08_Loops/                        # for loops and variants
+│   ├── ex_09_While_loop/                   # while, break, continue, pass
+│   ├── ex_10_Functions/                    # Function types, args, defaults, *args
+│   ├── ex_11_Functions_Global/             # Scope, globals, nested functions
+│   ├── ex_12_Decorator_TypeConversion/     # Decorators and type conversion
+│   ├── ex_13_Lambda_Exp/                   # Lambda expressions
+│   ├── ex_14_LIST_TUPLE/                   # Lists and tuples
+│   ├── ex_15_SET/                          # Sets and frozensets
+│   ├── ex_16_Map_Filters/                  # map() and filter()
+│   ├── ex_17_Dict/                         # Dictionaries
+│   └── ex_18_OOPs_Python/                  # OOP, exceptions, modules, packages, pytest
 └── README.md
 ```
 
@@ -104,7 +124,13 @@ enterprise-grade QA work using deterministic, anti-hallucination guardrails.
   meeting transcripts, Lucid charts, Jenkins logs, and both framework repos) through
   source-aware chunkers, indexes dense + BM25 vectors in Qdrant (Qwen3-Embedding via
   Ollama), reranks with a cross-encoder, and answers via Groq. See
-  `chapter_12_RAG_QA_BuddyAI/README.md`.
+   `chapter_12_RAG_QA_BuddyAI/README.md`.
+- **Chapter 15 — Python Concepts:** A from-scratch Python track in 18 exercise sets
+  (basics, keywords/identifiers, literals, data types, operators, conditions,
+  `match`, loops, functions, scope, decorators, lambdas, lists/tuples, sets,
+  `map`/`filter`, dicts), ending with OOP, exceptions, the `os` module, packages and
+  pytest. Each file carries a short header explaining the concept plus a more
+  complex worked example; notes and diagrams live in `chapter_15_PythonConcepts/assets/`.
 
 ## License
 

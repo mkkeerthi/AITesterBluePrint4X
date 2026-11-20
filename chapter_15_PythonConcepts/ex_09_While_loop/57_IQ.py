@@ -6,3 +6,12 @@ for i in range(0, 10):
         print("Five")
     else:
         print(i)
+
+# More complex: map each number to a word, falling back to the number.
+words = {0: "zero", 3: "three", 7: "seven"}
+for i in range(0, 10):
+    print(words.get(i, i))
+
+# The same loop written as a comprehension and joined into one line.
+labels = ["Five" if i == 5 else str(i) for i in range(10)]
+print(", ".join(labels))

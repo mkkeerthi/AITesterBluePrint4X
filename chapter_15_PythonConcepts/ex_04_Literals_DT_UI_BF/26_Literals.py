@@ -22,3 +22,19 @@ is_pramod_married = True  # bool
 
 # complex
 complex_number = 1 + 7j
+
+# More complex: convert between the bases and see that they are just numbers.
+for value in [binary_number, o, d]:
+    print(f"{value:<5} bin={bin(value):<10} oct={oct(value):<8} hex={hex(value):<8}")
+
+# int() can parse a numeric string in a chosen base.
+print(int("1010", 2))
+print(int("130", 8))
+print(int("12c", 16))
+
+# Underscores and numeric separators in literals.
+population = 1_400_000_000
+print(population)
+
+# Floats also accept exponent notation.
+print(1.5e3, 2E-3)

@@ -20,6 +20,46 @@ class Car:
 
 object_ref = Car()
 print(object_ref.public_pramod)
-print(object_ref.__private_baby)
+try:
+    print(object_ref.__private_baby)
+except AttributeError as error:
+    print("AttributeError:", error)
 # object_ref.wife()
 # object_ref.mother()
+
+# More complex: see the full picture - what outside code can reach, what the
+# name mangling does, and why properties are the better tool than getters.
+print("public:", object_ref.public_pramod)
+print("protected (convention only):", object_ref._protected_baby)
+
+# Name mangling renames __private_baby to _Car__private_baby, which is why
+# the plain attribute lookup above failed.
+print("mangled access:", object_ref._Car__private_baby)
+
+# Inside-class methods do reach the private attribute.
+object_ref.wife()
+
+# The idiomatic replacement for getters/setters is a property.
+class Wallet:
+    def __init__(self, balance):
+        self._balance = balance
+
+    @property
+    def balance(self):
+        return self._balance
+
+    @balance.setter
+    def balance(self, value):
+        if value < 0:
+            raise ValueError("balance cannot be negative")
+        self._balance = value
+
+
+w = Wallet(100)
+print("read like an attribute:", w.balance)
+w.balance = 150
+print("after set:", w.balance)
+try:
+    w.balance = -5
+except ValueError as error:
+    print("setter rejected:", error)

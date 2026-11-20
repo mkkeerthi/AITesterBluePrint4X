@@ -8,3 +8,21 @@ print("Hello", "World", "TheTestingAcademy", sep="__")
 
 print("*", "*", sep="-", end="\t")
 print("*", "*", sep="_")
+
+
+# More complex: build a small aligned table using sep and end.
+header = ("Name", "Score", "Status")
+rows = [("Pramod", 91, "PASS"), ("Amit", 47, "FAIL"), ("Navita", 88, "PASS")]
+
+print(" | ".join(header))
+print("-" * 24)
+for name, score, status in rows:
+    # end="" keeps all three prints on the same line
+    print(f"{name:<8}", end="")
+    print(f"{score:<6}", end="")
+    print(f"{status:>6}")
+
+# end=" " lets a loop print on one line instead of one line per item
+for number in range(1, 6):
+    print(number * number, end=" ")
+print()  # finally move to a new line

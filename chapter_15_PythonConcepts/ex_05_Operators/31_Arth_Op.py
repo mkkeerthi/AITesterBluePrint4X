@@ -32,3 +32,25 @@ how_many_lambo_pramod = -1
 how_many_lambo_pramod = how_many_lambo_pramod + 1
 print(how_many_lambo_pramod)
 
+# More complex: every arithmetic operator in one realistic calculation.
+price = 1250
+quantity = 3
+tax_percent = 18
+
+subtotal = price * quantity
+tax = subtotal * tax_percent / 100
+total = subtotal + tax
+
+print(f"Subtotal: {subtotal}")
+print(f"Tax ({tax_percent}%): {tax:.2f}")
+print(f"Total: {total:.2f}")
+
+# // and % work together: split a total into boxes of 12.
+items = 100
+per_box = 12
+print("Full boxes:", items // per_box, "loose items:", items % per_box)
+
+# A string can be repeated with *, and averaged with /.
+print("=" * 20)
+print("Average price:", subtotal / quantity)
+

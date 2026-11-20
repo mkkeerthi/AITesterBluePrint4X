@@ -14,6 +14,9 @@ venv/
 # Langflow runtime data (SQLite DB + encryption secret key)
 langflow_data/
 
+# Playwright MCP artifacts (page snapshots, screenshots)
+.playwright-mcp/
+
 # Credentials / local config (must never be committed)
 .env
 config.json

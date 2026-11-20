@@ -18,3 +18,20 @@ match day:
         print("Weekend")
     case _:
         print("Invalid day")
+
+# More complex: match with a guard (if), tuple class-patterns and wildcards,
+# wrapped in a function so several values can be tested.
+def describe(day):
+    match day:
+        case 1 | 2 | 3 | 4 | 5:
+            print(f"{day} is a weekday")
+        case 6 | 7:
+            print(f"{day} is the weekend")
+        case int(value) if value < 1 or value > 7:
+            print(f"{value} is out of range")
+        case _:
+            print(f"{day!r} is not a number")
+
+
+for value in [1, 5, 6, 7, 0, 9, "Mon"]:
+    describe(value)

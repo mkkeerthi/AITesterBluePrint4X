@@ -41,3 +41,28 @@ def function_outside():
 geeta = Person()
 amit = Person()
 navita = Person()
+
+# More complex: actually use the objects - set attributes per instance and
+# call the behaviours, including a method that returns a value.
+geeta.name = "Geeta"
+geeta.age = 30
+geeta.talk()
+geeta.sleep("Geeta")
+
+amit.name = "Amit"
+amit.walk()
+print(amit.method_walk_return())
+
+# Each object keeps its own state - changing one does not affect the others.
+print("geeta:", geeta.name, "| amit:", amit.name)
+print("navita untouched:", navita.name)
+
+# Class attributes describe the shape; instance attributes hold the data.
+print("class default:", Person.name)
+print("instance value:", geeta.name)
+
+# Calling a method directly through the class passes self explicitly.
+Person.talk(geeta)
+
+# Type checks confirm these are Person instances.
+print(isinstance(geeta, Person), type(amit).__name__)

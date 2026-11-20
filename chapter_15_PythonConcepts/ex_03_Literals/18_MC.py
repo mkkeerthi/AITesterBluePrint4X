@@ -9,3 +9,23 @@ This is multi comment
 3. Print the age of pramod
 """
 print(age)
+
+# More complex: inline comments annotating a small config, plus a short
+# module docstring describing what the script does.
+"""Test configuration used by the examples below."""
+
+BASE_URL = "https://api.example.com"  # str literal
+TIMEOUT_SECONDS = 30                  # int literal
+RETRY_LIMIT = 3                       # int literal
+VERIFY_SSL = True                     # bool literal
+SUPPORTED_METHODS = ("GET", "POST")   # tuple literal
+
+config = {
+    "base_url": BASE_URL,
+    "timeout": TIMEOUT_SECONDS,
+    "retry": RETRY_LIMIT,
+    "verify": VERIFY_SSL,
+}
+
+for key, value in config.items():
+    print(f"{key:<10} = {value!r}")  # !r shows the repr, so types are visible

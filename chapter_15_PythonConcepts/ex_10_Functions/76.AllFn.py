@@ -66,3 +66,22 @@ result = sum_of_two_number_with_default(num1=34, num2=34)
 print(result)
 result = sum_of_two_number_with_default()
 print(result)
+
+# More complex: one function that combines everything - required, default,
+# *args and **kwargs - the most flexible signature Python allows.
+def run_suite(name, *cases, env="dev", **options):
+    print(f"Suite: {name} (env={env}, timeout={options.get('timeout', 30)}s)")
+    for case in cases:
+        print("  -", case)
+    if options.get("verbose"):
+        print("  options:", options)
+
+
+run_suite("smoke", "login", "logout")
+run_suite("regression", "search", "checkout", env="qa", timeout=60, verbose=True)
+
+# Order rules for a signature: positional, default, *args, then **kwargs.
+# A function can also be passed around like any other value.
+operations = {"add": sum_of_two, "mul": lambda a, b: a * b}
+for label, fn in operations.items():
+    print(f"{label}(3, 4) = {fn(3, 4)}")

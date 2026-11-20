@@ -14,3 +14,20 @@ print(type(c1))
 print(len(name))
 print(name.upper())
 print(name.lower())
+
+# More complex: the most useful string methods and slicing.
+text = "  API Test Automation  "
+print(text.strip())              # remove surrounding spaces
+print(text.strip().replace("Test", "UI"))
+print(text.strip().split(" "))   # split into words
+print("-".join(["GET", "users", "1"]))
+print(text.strip().startswith("API"))
+print(text.strip().endswith("Automation"))
+print(name[:3], name[-3:])       # slicing: first 3, last 3
+print(name[::-1])                # reverse
+print("pramod" in name.lower())  # membership (case-insensitive)
+
+# Strings are immutable: methods return new strings.
+original = "hello"
+changed = original.upper()
+print(original, changed)

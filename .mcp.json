@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "transport": "stdio",
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "msedge"
+      ]
+    },
+    "atlassian": {
+      "transport": "http",
+      "enabled": true,
+      "url": "https://mcp.atlassian.com/v2/mcp"
+    }
+  }
+}

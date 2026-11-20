@@ -19,3 +19,35 @@ print(result5)
 
 result6 = sum_three(a=10, b=67, c=45)
 print(result6)
+
+# More complex: what breaks when defaults and required parameters are mixed,
+# and how keyword-only arguments change the rules.
+def mixed(required, optional=10):
+    return required + optional
+
+
+print(mixed(5))              # 15
+print(mixed(5, 20))          # 25
+print(mixed(optional=1, required=2))  # order-free with keywords
+
+# A required parameter cannot follow a defaulted one without making it
+# keyword-only: def bad(a=1, b) is a SyntaxError.
+
+# Keyword-only parameters (after *) must be passed by name.
+def keyword_only(a, *, b=1, c=2):
+    return a + b + c
+
+
+print(keyword_only(10))
+print(keyword_only(10, b=5))
+# keyword_only(10, 5)  -> TypeError: takes 1 positional argument
+
+# A subtle order-of-evaluation case: defaults are evaluated once, at
+# definition time, so mutable defaults are shared.
+def collect(item, store=[]):
+    store.append(item)
+    return list(store)
+
+
+print(collect("a"))
+print(collect("b"))

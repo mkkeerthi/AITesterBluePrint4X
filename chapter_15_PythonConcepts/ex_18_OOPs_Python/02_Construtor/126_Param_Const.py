@@ -29,5 +29,33 @@ chow.bark()
 desi = Dog("rancho","desi")
 desi.bark()
 
+# More complex: default argument values so the no-argument call works too,
+# and an optional attribute set after construction.
+class Dog2:
+    def __init__(self, name="unknown", breed="mixed", age=1):
+        self.name = name
+        self.breed = breed
+        self.age = age
+        self.tricks = []          # per-object list, not shared
+
+    def learn(self, trick):
+        self.tricks.append(trick)
+        return self
+
+    def profile(self):
+        tricks = ", ".join(self.tricks) if self.tricks else "none"
+        return f"{self.name} ({self.breed}, {self.age}y) knows: {tricks}"
+
+    def __repr__(self):
+        return f"Dog2({self.name!r})"
+
+
+stray = Dog2()                       # all defaults
+print(stray.profile())
+print(Dog2("rex", "lab", 3).learn("sit").learn("roll").profile())
+
 # This will not call the Default PARAM, we don't have defalt c
-straydog = Dog()
+try:
+    straydog = Dog()
+except TypeError as error:
+    print("TypeError:", error)
